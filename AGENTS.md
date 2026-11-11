@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Application architecture
+- Keep the shared workspace and session-only mock order state in NexusProvider around the root Outlet so navigation retains edits without implying durable storage.
+- Use separate content routes for each maintenance module and shared metadata helpers so navigation and page titles remain consistent.
+- Define visual styles and semantic palette tokens in src/styles.css so dark/light themes apply consistently.

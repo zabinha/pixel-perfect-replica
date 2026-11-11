@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AtivosRouteImport } from './routes/ativos'
+import { Route as OrdensRouteImport } from './routes/ordens'
+import { Route as PreditivaRouteImport } from './routes/preditiva'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AtivosRoute = AtivosRouteImport.update({
+  id: '/ativos',
+  path: '/ativos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrdensRoute = OrdensRouteImport.update({
+  id: '/ordens',
+  path: '/ordens',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreditivaRoute = PreditivaRouteImport.update({
+  id: '/preditiva',
+  path: '/preditiva',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ativos': typeof AtivosRoute
+  '/ordens': typeof OrdensRoute
+  '/preditiva': typeof PreditivaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ativos': typeof AtivosRoute
+  '/ordens': typeof OrdensRoute
+  '/preditiva': typeof PreditivaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ativos': typeof AtivosRoute
+  '/ordens': typeof OrdensRoute
+  '/preditiva': typeof PreditivaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/ativos' | '/ordens' | '/preditiva'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/ativos' | '/ordens' | '/preditiva'
+  id: '__root__' | '/' | '/ativos' | '/ordens' | '/preditiva'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AtivosRoute: typeof AtivosRoute
+  OrdensRoute: typeof OrdensRoute
+  PreditivaRoute: typeof PreditivaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ativos': {
+      id: '/ativos'
+      path: '/ativos'
+      fullPath: '/ativos'
+      preLoaderRoute: typeof AtivosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ordens': {
+      id: '/ordens'
+      path: '/ordens'
+      fullPath: '/ordens'
+      preLoaderRoute: typeof OrdensRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preditiva': {
+      id: '/preditiva'
+      path: '/preditiva'
+      fullPath: '/preditiva'
+      preLoaderRoute: typeof PreditivaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AtivosRoute: AtivosRoute,
+  OrdensRoute: OrdensRoute,
+  PreditivaRoute: PreditivaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
